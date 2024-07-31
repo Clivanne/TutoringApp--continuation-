@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Delete Student</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Tutoring App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/addStudent">Add new student</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <br>
+        <div class="text-center"><h2>Delete Student</h2></div>
+        <br>
+        <div class="text-center">
+            <% if (student) { %>
+                <!-- display student details for deletion confirmation -->
+                <p><b>Are you sure you want to delete the following student?</b></p>
+                <p><b>Student ID:</b> <%= student.student_id %></p>
+                <p><b>Name:</b> <%= student.name %></p>
+                <p><b>Schedule:</b> <%= student.schedule %></p>
+                <p><b>Points Earned:</b> <%= student.points_earned %></p>
+                <p><b>Subject:</b> <%= student.subject %></p>
+                <p><b>Contact:</b> <%= student.contact %></p>
+                <p><b>Image:</b> <img src="/images/<%= student.image %>" width="50"></p>
+                <br>
+                <!-- form to confirm student deletion -->
+                <form action="/deleteStudent/<%= student.student_id %>" method="POST">
+                    <input type="hidden" name="_method" value="DELETE"> <!-- use method override -->
+                    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                </form>
+            <% } else { %>
+                <!-- message if no student found -->
+                <p>No student found.</p>
+            <% } %>
+            <!-- back button to return to student index -->
+            <a href="/index" class="btn btn-secondary mt-3">Back</a>
+        </div>
+    </div>
+</body>
+</html>
